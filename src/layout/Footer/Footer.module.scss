@@ -1,0 +1,14 @@
+.footer {
+  background: var(--uui-surface-sunken);
+  box-shadow: 0 3px 5px 8px #d3dce480;
+  padding: 24px 0;
+
+  @media(max-width: 767px) {
+    :global(.container) {
+      box-sizing: border-box;
+      max-width: 100%;
+      padding: 0 24px;
+    }
+  }
+
+}

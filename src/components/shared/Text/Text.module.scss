@@ -1,0 +1,15 @@
+@mixin font-family($font) {
+    &.uui-font-#{$font} {
+        --uui-text-font: #{$font};
+    }
+}
+
+.root {
+    --uui-text-font: var(--uui-font);
+    font-family: var(--uui-text-font);
+
+    &:global {
+        @include font-family('Inter');
+        @include font-family('Prompt');
+    }
+}
