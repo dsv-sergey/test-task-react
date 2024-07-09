@@ -4,7 +4,7 @@ import './assets/theme/theme-faraway.scss';
 import './index.module.scss';
 //
 import { StrictMode } from 'react';
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from '@tanstack/react-query';
 import { createRoot } from 'react-dom/client';
 import { createBrowserHistory } from 'history';
 import { Route, Router, Switch, Redirect } from 'react-router-dom';
@@ -18,8 +18,9 @@ import { ErrorHandler } from '@epam/uui';
 import { Modals, Snackbar } from '@epam/uui-components';
 
 import { MainPage } from './pages/MainPage';
-import { PersonPage } from "./pages/PersonPage";
-import { createQueryClient } from "./services";
+import { PersonPage } from './pages/PersonPage';
+import { createQueryClient } from './services';
+import { APP_ROUTES } from './constants';
 
 const history = createBrowserHistory();
 const router = new HistoryAdaptedRouter(history);
@@ -31,20 +32,28 @@ function UuiEnhancedApp() {
     return (
         <UuiContext.Provider value={services}>
             <QueryClientProvider client={queryClient}>
-            <ErrorHandler>
-                <Router history={history}>
-                    <Switch>
-                        <Route exact path="/person/:id" component={PersonPage} />
-                        <Route exact path="/person" component={MainPage} />
-                        <Route exact path="/">
-                            <Redirect to="/person" />
-                        </Route>
-                    </Switch>
-                </Router>
-                <Snackbar />
-                <Modals />
-                <DragGhost />
-            </ErrorHandler>
+                <ErrorHandler>
+                    <Router history={history}>
+                        <Switch>
+                            <Route
+                                exact
+                                path={APP_ROUTES.PERSON}
+                                component={PersonPage}
+                            />
+                            <Route
+                                exact
+                                path={APP_ROUTES.PEOPLE}
+                                component={MainPage}
+                            />
+                            <Route exact path={APP_ROUTES.HOME}>
+                                <Redirect to={APP_ROUTES.PEOPLE} />
+                            </Route>
+                        </Switch>
+                    </Router>
+                    <Snackbar />
+                    <Modals />
+                    <DragGhost />
+                </ErrorHandler>
             </QueryClientProvider>
         </UuiContext.Provider>
     );

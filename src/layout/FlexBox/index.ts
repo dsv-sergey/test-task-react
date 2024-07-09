@@ -1,1 +1,1 @@
-export * from "./FlexBox";
+export * from './FlexBox';

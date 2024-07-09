@@ -1,4 +1,6 @@
-export interface IVehicles {
+import { SwapiRequest } from './request';
+
+export interface IVehicle {
     name: string;
     model: string;
     manufacturer: string;
@@ -9,12 +11,12 @@ export interface IVehicles {
     passengers: string;
     cargo_capacity: string;
     consumables: string;
-    hyperdrive_rating: string;
-    MGLT: string;
-    starship_class: string;
+    vehicle_class: string;
     pilots: string[];
     films: string[];
     created: string;
     edited: string;
     url: string;
 }
+
+export interface VehiclesRequest extends SwapiRequest<IVehicle[]> {}

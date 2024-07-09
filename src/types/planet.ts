@@ -1,3 +1,5 @@
+import { SwapiRequest } from './request';
+
 export interface IPlanet {
     name: string;
     rotation_period: string;
@@ -14,3 +16,5 @@ export interface IPlanet {
     edited: string;
     url: string;
 }
+
+export interface PlanetsRequest extends SwapiRequest<IPlanet[]> {}

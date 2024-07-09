@@ -1,3 +1,3 @@
-export * from "./usePerson";
-export * from "./usePersonsWithPaging";
-export * from "./usePlanet";
+export * from './usePerson';
+export * from './usePersonsWithPaging';
+export * from './usePlanet';

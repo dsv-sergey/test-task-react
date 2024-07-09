@@ -1,4 +1,6 @@
-export interface ISpecies {
+import { SwapiRequest } from './request';
+
+export interface ISpecie {
     name: string;
     classification: string;
     designation: string;
@@ -15,3 +17,5 @@ export interface ISpecies {
     edited: string;
     url: string;
 }
+
+export interface SpeciesRequest extends SwapiRequest<ISpecie[]> {}

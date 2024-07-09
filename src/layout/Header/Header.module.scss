@@ -1,47 +1,47 @@
 .wrapper {
-  background: var(--uui-neutral-90);
-  box-shadow: var(--uui-shadow-level-3);
-  position: relative;
+    background: var(--uui-neutral-90);
+    box-shadow: var(--uui-shadow-level-3);
+    position: relative;
 }
 
 .title {
-  --app-header-height: 76px;
-  --app-margin: 20px;
-  height: calc(var(--app-header-height) - (var(--app-margin) * 2));
-  box-sizing: border-box;
-  text-align: center;
-  font-family: var(--uui-font);
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 36px;
-  margin-top: var(--app-margin);
-  margin-bottom: var(--app-margin);
-  color: var(--uui-neutral-0);
-}
-
-@media(min-width: 768px) {
-  .title {
-    --app-header-height: 80px;
+    --app-header-height: 76px;
     --app-margin: 20px;
-    font-size: 32px;
-    line-height: 40px;
-  }
+    height: calc(var(--app-header-height) - (var(--app-margin) * 2));
+    box-sizing: border-box;
+    text-align: center;
+    font-family: var(--uui-font);
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    margin-top: var(--app-margin);
+    margin-bottom: var(--app-margin);
+    color: var(--uui-neutral-0);
 }
 
-@media(min-width: 1280px) {
-  .title {
-    --app-header-height: 120px;
-    --app-margin: 30px;
-    font-size: 56px;
-    line-height: 60px;
-  }
+@media (min-width: 768px) {
+    .title {
+        --app-header-height: 80px;
+        --app-margin: 20px;
+        font-size: 32px;
+        line-height: 40px;
+    }
 }
 
-@media(min-width: 1920px) {
-  .title {
-    --app-header-height: 152px;
-    --app-margin: 40px;
-    font-size: 60px;
-    line-height: 72px;
-  }
+@media (min-width: 1280px) {
+    .title {
+        --app-header-height: 120px;
+        --app-margin: 30px;
+        font-size: 56px;
+        line-height: 60px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .title {
+        --app-header-height: 152px;
+        --app-margin: 40px;
+        font-size: 60px;
+        line-height: 72px;
+    }
 }

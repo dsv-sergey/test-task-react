@@ -1,3 +1,5 @@
+import { SwapiRequest } from './request';
+
 export interface IFilm {
     title: string;
     episode_id: number;
@@ -14,3 +16,5 @@ export interface IFilm {
     edited: string;
     url: string;
 }
+
+export interface FilmsRequest extends SwapiRequest<IFilm[]> {}

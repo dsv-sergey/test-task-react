@@ -13,7 +13,7 @@ export default defineConfig({
     ],
     optimizeDeps: {},
     test: {
-        include: ['**/*.test.tsx'],
+        include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
         globals: true,
         environment: 'jsdom',
         setupFiles: 'vitest-setup.js',
@@ -22,6 +22,12 @@ export default defineConfig({
                 transformCss: false,
                 transformAssets: false,
             },
+        },
+        coverage: {
+            provider: 'v8',
+            reporter: ['text', 'json', 'html'],
+            include: ['src/'],
+            exclude: ['node_modules/', 'dist/', 'coverage/'],
         },
     },
 });

@@ -8,6 +8,7 @@ module.exports = {
         'plugin:react-hooks/recommended',
         'plugin:prettier/recommended',
         'plugin:react/jsx-runtime',
+        'plugin:@typescript-eslint/recommended'
     ],
     env: {
         es6: true,
@@ -52,4 +53,9 @@ module.exports = {
             },
         },
     ],
+    rules: {
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
+        '@typescript-eslint/ban-ts-comment': 'off',
+    }
 };

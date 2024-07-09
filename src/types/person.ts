@@ -1,3 +1,5 @@
+import { SwapiRequest } from './request';
+
 export interface IPerson {
     name: string;
     height: string;
@@ -17,39 +19,34 @@ export interface IPerson {
     url: string;
 }
 
-export type TShortInfo = Omit<IPerson,
-    | "films"
-    | "species"
-    | "vehicles"
-    | "starships"
-    | "created"
-    | "edited"
-    | "url"
->
+export type TShortInfo = Omit<
+    IPerson,
+    | 'films'
+    | 'species'
+    | 'vehicles'
+    | 'starships'
+    | 'created'
+    | 'edited'
+    | 'url'
+>;
 
 export type TShortInfoFields = Array<keyof TShortInfo>;
 
-export type TDetailedInfo = Omit<IPerson,
-    | "created"
-    | "edited"
-    | "url"
->
+export type TDetailedInfo = Omit<IPerson, 'created' | 'edited' | 'url'>;
 
 export type TDetailedInfoFields = Array<keyof TDetailedInfo>;
 
-export type TStringTypeFields = Omit<TDetailedInfoFields, "films" | "species" | "vehicles" | "starships">
+export type TStringTypeFields = Omit<
+    TDetailedInfoFields,
+    'films' | 'species' | 'vehicles' | 'starships'
+>;
 
 export type TPersonListProps = {
     persons?: IPerson[];
-}
+};
 
-export interface IPersonsRequest {
-    count: number;
-    next: string | null;
-    previous: string | null;
-    results: IPerson[];
-}
+export interface PersonsRequest extends SwapiRequest<IPerson[]> {}
 
 export type TError = {
-    message: string
-}
+    message: string;
+};

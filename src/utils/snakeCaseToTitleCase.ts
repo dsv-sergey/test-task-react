@@ -1,5 +1,5 @@
 export const snakeCaseToTitleCase = (input: string): string => {
-    const words = input.split("_");
+    const words = input.split('_');
 
     if (words.length === 1) {
         // If there's only one word, capitalize the first letter and return
@@ -7,7 +7,8 @@ export const snakeCaseToTitleCase = (input: string): string => {
     }
 
     const [firstWord, ...restOfWords] = words;
-    const capitalizedFirstWord = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
+    const capitalizedFirstWord =
+        firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
 
-    return [capitalizedFirstWord, ...restOfWords].flat().join(" ");
+    return [capitalizedFirstWord, ...restOfWords].flat().join(' ');
 };

@@ -1,4 +1,6 @@
-export interface IStarships {
+import { SwapiRequest } from './request';
+
+export interface IStarship {
     name: string;
     model: string;
     manufacturer: string;
@@ -18,3 +20,5 @@ export interface IStarships {
     edited: string;
     url: string;
 }
+
+export interface StarshipsRequest extends SwapiRequest<IStarship[]> {}

@@ -1,14 +1,20 @@
 {
   "name": "test-task-react",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "start": "vite --port 3000 --open",
     "build": "npm run typecheck && vite build",
     "serve": "vite preview",
     "test": "vitest",
+    "coverage": "vitest run --coverage",
     "test:ci": "vitest run",
+    "format": "prettier --write ./src",
     "lint": "eslint ./src/**/*.{ts,tsx} --fix",
     "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "dependencies": {
     "@epam/assets": "latest",
@@ -42,7 +48,7 @@
     "typescript": "5.4.2",
     "vite": "5.2.6",
     "vite-plugin-svgr": "4.2.0",
-    "vitest": "1.2.2",
+    "vitest": "1.6.0",
     "vitest-dom": "0.1.1"
   },
   "resolutions": {
@@ -53,6 +59,9 @@
   "license": "MIT",
   "devDependencies": {
     "@types/lodash.isempty": "^4.4.9",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@vitest/coverage-istanbul": "^1.6.0",
+    "@vitest/coverage-v8": "^1.6.0",
     "axios-mock-adapter": "^1.22.0"
   }
 }

@@ -1,55 +1,66 @@
-import axios from "axios";
-import { ORIGIN } from "../constants";
-import { VEHICLES_KEY, VEHICLES_PAGE_KEY } from "../constants";
-import { LazyDataSourceApiRequest } from "@epam/uui-core";
-import { IPersonsRequest, IVehicles } from "../types";
-import { queryClient } from "../services";
-import { fetchData } from "./data";
+import {
+    PAGINATION,
+    SWAPI_ROUTES,
+    VEHICLES_KEY,
+    VEHICLES_PAGE_KEY,
+} from '../constants';
+import { LazyDataSourceApiRequest } from '@epam/uui-core';
+import { VehiclesRequest, IVehicle } from '../types';
+import { queryClient } from '../services';
+import { fetchData } from './fetchData';
+import { fetchFromSwapi } from './fetchFromSwapi';
+import { getQuery } from '../utils';
 
-
-export const fetchVehicles = async (page: number) => {
-    const { data } = await axios({
-        method: "GET",
-        url: `${ORIGIN}/vehicles/?page=${page}`
+const fetchVehiclesByIds = async (ids: string[]) => {
+    const requests = ids.map(async (path) => {
+        if (typeof path !== 'string') return;
+        return await queryClient.fetchQuery<IVehicle>({
+            queryKey: [VEHICLES_KEY, path],
+            queryFn: () => fetchData(path),
+        });
     });
 
-    return data;
+    const vehiclesArr = await Promise.all(requests);
+
+    return Promise.resolve({ items: [...vehiclesArr] });
 };
 
-export const lazyVehiclesApi = async (rq: LazyDataSourceApiRequest<IVehicles, string, unknown>) => {
-    const { ids, range } = rq;
+const fetchVehiclesByRange = async (range: { from?: number; count?: number }) => {
+    let page = (range?.from && Math.floor(range?.from / PAGINATION.ITEMS_PER_PAGE) + 1) || 1;
 
-    let page = (range?.from && Math.floor(range?.from / 10) + 1) || 1;
+    const items: IVehicle[] = [];
 
-    if (ids && ids?.length > 0) {
-        const requests = ids.map(async (path) => {
-            return await queryClient.fetchQuery({
-                queryKey: [VEHICLES_KEY, path],
-                queryFn: () => fetchData(path),
-            });
+    const fetchVehicles = async (page: number) => {
+        const query = getQuery({ page });
+        return await fetchFromSwapi(`${SWAPI_ROUTES.VEHICLES}?${query}`);
+    };
+
+    const fetchPage = async (pageNumber: number): Promise<VehiclesRequest> => {
+        return await queryClient.fetchQuery({
+            queryKey: [VEHICLES_PAGE_KEY, pageNumber],
+            queryFn: () => fetchVehicles(pageNumber),
         });
+    };
 
-        const vehiclesArr = await Promise.all(requests);
+    const initialData = await fetchPage(page);
 
-        return Promise.resolve({ items: [...vehiclesArr] });
-    }
+    items.push(...initialData.results);
 
-    const items = [];
-
-    const data: IPersonsRequest = await queryClient.fetchQuery({
-        queryKey: [VEHICLES_PAGE_KEY, page],
-        queryFn: () => fetchVehicles(page),
-    });
-    items.push(...data.results);
-
-    while (range?.count && (range.count > items.length) && items.length < data.count) {
-        page = page + 1;
-        const data: IPersonsRequest = await queryClient.fetchQuery({
-            queryKey: [VEHICLES_PAGE_KEY, page],
-            queryFn: () => fetchVehicles(page),
-        });
+    while (range?.count && range.count > items.length && items.length < initialData.count) {
+        page += 1;
+        const data = await fetchPage(page);
         items.push(...data.results);
     }
 
-    return Promise.resolve({ items: items, count: data.count });
+    return Promise.resolve({ items: items, count: items.length });
+};
+
+export const lazyVehiclesApi = async (rq: LazyDataSourceApiRequest<IVehicle, string>) => {
+    const { ids, range } = rq;
+
+    if (ids && ids?.length > 0) {
+        return fetchVehiclesByIds(ids);
+    }
+
+    return fetchVehiclesByRange(range);
 };

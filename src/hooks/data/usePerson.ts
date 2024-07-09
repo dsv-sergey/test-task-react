@@ -1,16 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchData } from "../../api";
-import { ORIGIN } from "../../constants";
-
-const KEY = "PERSONS";
+import { useQuery } from '@tanstack/react-query';
+import { fetchFromSwapi } from '../../api';
+import { PEOPLE_KEY, SWAPI_ROUTES } from '../../constants';
+import { IPerson } from '../../types';
 
 export const usePerson = (personId: string) => {
-    const query = useQuery({
-        queryKey: [KEY, `${ORIGIN}/people/${personId}/`],
-        queryFn: () => fetchData(`${ORIGIN}/people/${personId}/`),
+    return useQuery<IPerson>({
+        queryKey: [
+            PEOPLE_KEY,
+            `${SWAPI_ROUTES.BASE_URL + SWAPI_ROUTES.PEOPLE}${personId}/`,
+        ],
+        queryFn: () => fetchFromSwapi(`${SWAPI_ROUTES.PEOPLE}${personId}`),
         refetchOnWindowFocus: false,
         staleTime: Infinity,
     });
-
-    return query;
 };
