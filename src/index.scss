@@ -18,38 +18,38 @@ body {
     background: var(--uui-app-bg);
 }
 
-:global(.uui-popper) {
-    :global(.uui-dropdown-body) {
+.uui-popper {
+    .uui-dropdown-body {
         --uui-font: 'Inter';
     }
 }
 
-:global {
+
+.container {
+    padding-left: 24px;
+    padding-right: 24px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
     .container {
-        padding-left: 24px;
-        padding-right: 24px;
-        margin: 0 auto;
-    }
-
-    @media (min-width: 768px) {
-        .container {
-            max-width: 700px;
-        }
-    }
-
-    @media (min-width: 1280px) {
-        .container {
-            max-width: 1060px;
-        }
-    }
-
-    @media (min-width: 1920px) {
-        .container {
-            max-width: 1420px;
-        }
-    }
-
-    .uui-input-box.uui-invalid {
-        border-color: var(--uui-error-50);
+        max-width: 700px;
     }
 }
+
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1060px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1420px;
+    }
+}
+
+.uui-input-box.uui-invalid {
+    border-color: var(--uui-error-50);
+}
+
