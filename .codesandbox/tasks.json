@@ -9,7 +9,7 @@
     "build": {
       "name": "build",
       "command": "yarn build",
-      "runAtStart": false
+      "runAtStart": true
     },
     "start": {
       "name": "start",
