@@ -6,15 +6,18 @@
     }
   ],
   "tasks": {
-    "start": {
-      "name": "start",
-      "command": "yarn start",
-      "runAtStart": true
-    },
     "build": {
       "name": "build",
       "command": "yarn build",
       "runAtStart": false
+    },
+    "start": {
+      "name": "start",
+      "command": "yarn serve",
+      "runAtStart": true,
+      "preview": {
+        "port": 4173
+      }
     },
     "test": {
       "name": "test",
